@@ -20,7 +20,8 @@ const quesSolve = (page, ques, ans) => new Promise((res, rej) => {
         let focusedEditorPromise = waitForClick('.monaco-editor.no-user-select.vs', page);
         return focusedEditorPromise;
     }).then(() => waitForClick('.checkbox-input', page)
-    ).then(() => page.waitForSelector('textarea.custominput', page)).then(() => page.type('textarea.custominput', ans, { delay: 10 })).then(() => {
+    ).then(() => page.waitForSelector('textarea.custominput', page)).then(() => page.type('textarea.custominput', ans, { delay: 10 })
+    ).then(() => {
         let ctrlPressed = page.keyboard.down('Control');
         return ctrlPressed;
     }).then(() => {
@@ -48,7 +49,7 @@ const quesSolve = (page, ques, ans) => new Promise((res, rej) => {
         let ctrlReleased = page.keyboard.up('Control');
         return ctrlReleased;
     }).then(() => {
-        return page.click('.hr-monaco__run-code', { elay: 50 });
+        return page.click('.hr-monaco__run-code', { delay: 50 });
     }).then(() => res()).catch(() => rej());
 });
 
