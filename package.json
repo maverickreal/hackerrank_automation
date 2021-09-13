@@ -1,0 +1,22 @@
+{
+  "name": "hackerrank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maverickreal/hackerrank_automation.git"
+  },
+  "author": "maverick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maverickreal/hackerrank_automation/issues"
+  },
+  "homepage": "https://github.com/maverickreal/hackerrank_automation#readme",
+  "dependencies": {
+    "puppeteer-core": "^10.2.0"
+  }
+}
