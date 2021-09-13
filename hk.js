@@ -14,13 +14,42 @@ const waitForClick = (selector, page) => new Promise((res, rej) => {
     waitForModulePromise.then(() => page.click(selector)).then(() => res()).catch(() => rej());
 });
 
-const quesSolve = (page, ques, ans) => new Promise(() => {
+const quesSolve = (page, ques, ans) => new Promise((res, rej) => {
     let quesBeClicked = ques.click();
     quesBeClicked.then(() => {
         let focusedEditorPromise = waitForClick('.monaco-editor.no-user-select.vs', page);
         return focusedEditorPromise;
     }).then(() => waitForClick('.checkbox-input', page)
-    ).then(() => page.waitForSelector('textarea.custominput', page)).then(() => page.type('textarea.custominput', ans, { delay: 10 }));
+    ).then(() => page.waitForSelector('textarea.custominput', page)).then(() => page.type('textarea.custominput', ans, { delay: 10 })).then(() => {
+        let ctrlPressed = page.keyboard.down('Control');
+        return ctrlPressed;
+    }).then(() => {
+        let aPressed = page.keyboard.down('A', { delay: 100 });
+        return aPressed;
+    }).then(() => {
+        let xPressed = page.keyboard.press('X', { delay: 100 });
+        return xPressed;
+    }).then(() => {
+        let ctrlReleased = page.keyboard.up('Control');
+        return ctrlReleased;
+    }).then(() => {
+        let realEditorfocused = waitForClick('.monaco-editor.no-user-select.vs', page);
+        return realEditorfocused;
+    }).then(() => {
+        let ctrlPressed = page.keyboard.down('Control');
+        return ctrlPressed;
+    }).then(() => {
+        let aPressed = page.keyboard.press('A', { delay: 100 });
+        return aPressed;
+    }).then(() => {
+        let vPressed = page.keyboard.press('V', { delay: 100 });
+        return vPressed;
+    }).then(() => {
+        let ctrlReleased = page.keyboard.up('Control');
+        return ctrlReleased;
+    }).then(() => {
+        return page.click('.hr-monaco__run-code', { elay: 50 });
+    }).then(() => res()).catch(() => rej());
 });
 
 browserOpen.then(browserObj => browserObj.newPage()).then(newTab => {
